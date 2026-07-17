@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   for (int i = 0; i < 5; i++) ...[
                     Builder(
                       builder: (context) {
-                        final int remainNum = (j + i) % 3;
+                        final int remainNum = ((j + 1) * 10 + i + 1) % 3;
                         String selectedNum = '${j + 1}${i + 1}'; // 番号編集
                         return GestureDetector(
                           onTap: () {
@@ -106,9 +106,25 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 10),
             ],
             const SizedBox(height: 30),
+            RichText(
+                text: TextSpan(
+              children: [
+                TextSpan(
+                  text: tappedNum,
+                  style: TextStyle(
+                      color: tappedNum == ""
+                          ? Colors.blueGrey
+                          : myFontColor[int.parse(tappedNum) % 3],
+                      fontSize: 25),
+                ),
+                TextSpan(
+                  text: tappedNum == "" ? "" : " がタップされました",
+                  style: TextStyle(color: Colors.blueGrey, fontSize: 20),
+                ),
+              ],
+            )),
             Text(
               tappedNum + (tappedNum == "" ? "" : " がタップされました"),
-//              '$tappedNum がタップされました',
               style: const TextStyle(
                 fontSize: 20,
                 color: Colors.blueGrey,
