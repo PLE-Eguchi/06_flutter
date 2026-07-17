@@ -31,13 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  String tappedNum = ""; // タップされた番号
 
   @override
   Widget build(BuildContext context) {
@@ -74,24 +68,32 @@ class _MyHomePageState extends State<MyHomePage> {
                     Builder(
                       builder: (context) {
                         final int remainNum = (j + i) % 3;
-                        String selectedNum; // タップした番号
-                        return Container(
-                          padding: const EdgeInsets.all(40), // 枠線と文字の間の「内側の余白」
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: myBorderColor[remainNum],
-                                width: 2), // 青い枠線を太さ2で引く
-                            borderRadius:
-                                BorderRadius.circular(30), // 枠線の角をちょっと丸くする
-                            color: myBackColor[remainNum],
-                          ),
-                          child: Text(
-                            '${j + 1}${i + 1}',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontStyle: FontStyle.italic,
-                              color: myFontColor[remainNum],
-                              letterSpacing: 1.2,
+                        String selectedNum = '${j + 1}${i + 1}'; // 番号編集
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              tappedNum = selectedNum;
+                            });
+                          },
+                          child: Container(
+                            padding:
+                                const EdgeInsets.all(40), // 枠線と文字の間の「内側の余白」
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: myBorderColor[remainNum],
+                                  width: 2), // 青い枠線を太さ2で引く
+                              borderRadius:
+                                  BorderRadius.circular(30), // 枠線の角をちょっと丸くする
+                              color: myBackColor[remainNum],
+                            ),
+                            child: Text(
+                              selectedNum,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontStyle: FontStyle.italic,
+                                color: myFontColor[remainNum],
+                                letterSpacing: 1.2,
+                              ),
                             ),
                           ),
                         );
@@ -104,21 +106,17 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 10),
             ],
             const SizedBox(height: 30),
-            const Text(
-              "test",
-              style: TextStyle(
-                fontSize: 18,
+            Text(
+              tappedNum + (tappedNum == "" ? "" : " がタップされました"),
+//              '$tappedNum がタップされました',
+              style: const TextStyle(
+                fontSize: 20,
                 color: Colors.blueGrey,
               ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
