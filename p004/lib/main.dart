@@ -67,8 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   for (int i = 0; i < 5; i++) ...[
                     Builder(
                       builder: (context) {
-                        final int remainNum = ((j + 1) * 10 + i + 1) % 3;
-                        String selectedNum = '${j + 1}${i + 1}'; // 番号編集
+                        final int displayNum = ((j + 1) * 10 + i + 1);
+                        final int remainNum = displayNum % 3;
+                        String selectedNum = displayNum.toString();
                         return GestureDetector(
                           onTap: () {
                             setState(() {
@@ -114,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(
                       color: tappedNum == ""
                           ? Colors.blueGrey
-                          : myFontColor[int.parse(tappedNum) % 3],
+                          : myFontColor[(int.tryParse(tappedNum) ?? 0) % 3],
                       fontSize: 25),
                 ),
                 TextSpan(
