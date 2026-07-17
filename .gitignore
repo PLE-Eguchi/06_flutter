@@ -1,0 +1,31 @@
+# 例1: Node.jsのプロジェクトで、自動ダウンロードされる巨大なフォルダを除外する場合
+node_modules/
+
+# 例2: Pythonの仮想環境フォルダを除外する場合
+.venv/
+venv/
+
+# 例3: Macが自動で作る隠しファイルを除外する場合
+.DS_Store
+
+# 例4: 拡張子が .log のファイルをすべて除外する場合
+*.log
+
+Flutter_memo.txt
+Flutterコード解釈.xlsx
+Flutter学習ログ.xlsx
+
+# どの階層にある Flutter の自動生成フォルダもすべて除外する設定
+**/.dart_tool/
+**/build/
+
+# ついでにFlutter開発で生成されるその他の不要ファイルも全階層で除外
+**/.packages
+**/.pub-cache/
+**/.pub/
+**/@pubspec.lock
+**/*.generated.jpg
+
+# OSが生成するゴミファイル
+**/.DS_Store
+**/Thumbs.db
