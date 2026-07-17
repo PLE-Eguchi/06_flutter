@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 TextSpan(
                   text: tappedNum == "" ? "" : " がタップされました",
-                  style: TextStyle(color: Colors.blueGrey, fontSize: 20),
+                  style: const TextStyle(color: Colors.blueGrey, fontSize: 20),
                 ),
               ],
             )),
