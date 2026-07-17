@@ -123,13 +123,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             )),
-            Text(
-              tappedNum + (tappedNum == "" ? "" : " がタップされました"),
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.blueGrey,
-              ),
-            ),
           ],
         ),
       ),
