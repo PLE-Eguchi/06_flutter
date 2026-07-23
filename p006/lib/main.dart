@@ -29,7 +29,7 @@ class MyDisp extends StatefulWidget {
 }
 
 class _MyDispState extends State<MyDisp> {
-  String testStatement = '';
+  String testStatement = 'まだ1度も押されてません';
   int cnt = 0;
 
   @override
@@ -38,7 +38,7 @@ class _MyDispState extends State<MyDisp> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text('Hello World !'),
-        Text(testStatement),
+        const SizedBox(height: 20),
         ElevatedButton(
             onPressed: () {
               cnt++;
@@ -46,7 +46,15 @@ class _MyDispState extends State<MyDisp> {
                 testStatement = '押されたのは $cnt 回目です';
               });
             },
-            child: const Text('ButtonTest')),
+            style: ElevatedButton.styleFrom(
+                fixedSize: const Size(200, 50),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0)),
+                backgroundColor: Colors.lightBlue,
+                foregroundColor: Colors.white),
+            child: const Text('Push !')),
+        const SizedBox(height: 20),
+        Text(testStatement),
       ],
     );
   }
