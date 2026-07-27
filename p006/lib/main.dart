@@ -28,6 +28,7 @@ class MyDisp extends StatefulWidget {
   State<MyDisp> createState() => _MyDispState();
 }
 
+// メインの表示内容設定
 class _MyDispState extends State<MyDisp> {
   String testStatement = 'まだ1度も押されてません';
   int pressedCnt = 0;
@@ -35,51 +36,68 @@ class _MyDispState extends State<MyDisp> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text('Hello World !'),
-        const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MyButton(
-              onPressed: !setOn
-                  ? null
-                  : () {
-                      setState(() {
-                        pressedCnt++;
-                        testStatement = "$pressedCnt 回押されました";
-                      });
-                    },
-            ),
-            const SizedBox(width: 50),
-            MySwitch(
-              switchValue: setOn,
-              onChanged: (bool newValue) {
-                setState(() {
-                  setOn = newValue;
-                });
-              },
-            )
-          ],
-        ),
-        const SizedBox(height: 20),
-        Text(testStatement),
-      ],
-    );
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text(testStatement),
+      const SizedBox(height: 20),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          MySwitch(
+            switchValue: setOn,
+            onChanged: (bool newValue) {
+              setState(() {
+                setOn = newValue;
+              });
+            },
+          ),
+          const SizedBox(width: 30),
+          MyButton(
+            isEnable: setOn,
+            onPressed: () {
+              setState(() {
+                pressedCnt++;
+                testStatement = "$pressedCnt 回押されました";
+              });
+            },
+          ),
+        ],
+      ),
+      const SizedBox(height: 30),
+      Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+              padding: const EdgeInsets.only(right: 30),
+              child: ElevatedButton(
+                onPressed: () {
+                  pressedCnt = 0;
+                  setState(() {
+                    testStatement = "カウンタをリセットしました";
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.lightGreen[100], // 背景色
+                  foregroundColor: Colors.green, // 文字色
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8), // 角丸
+                  ),
+                ),
+                child: const Text('reset'),
+              )))
+    ]);
   }
 }
 
+// コマンドボタンのクラス定義
 class MyButton extends StatelessWidget {
-  final VoidCallback? onPressed;
+  final bool isEnable;
+  final VoidCallback onPressed;
 
-  const MyButton({super.key, required this.onPressed});
+  const MyButton({super.key, required this.isEnable, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: onPressed,
+        onPressed: isEnable ? onPressed : null,
         style: ElevatedButton.styleFrom(
             fixedSize: const Size(200, 50),
             shape:
@@ -91,7 +109,7 @@ class MyButton extends StatelessWidget {
   }
 }
 
-// 1. Switchを使うためにStatefulWidgetを作成
+// スイッチボタンのクラス定義
 class MySwitch extends StatelessWidget {
   final bool switchValue;
   final ValueChanged<bool> onChanged;
