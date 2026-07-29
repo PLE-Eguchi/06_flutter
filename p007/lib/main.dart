@@ -12,6 +12,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.lightBlue[50],
+        // タイトル
         appBar: AppBar(
           leading: const Icon(Icons.church),
           title: const Text('入力フォーム'),
@@ -38,7 +39,7 @@ class _MyDispState extends State<MyDisp> {
   @override
   Widget build(BuildContext context) {
     return const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+//      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         MyInputBox(labelTitle: '姓', originalText: '例)山田'),
         MyInputBox(labelTitle: '名', originalText: '例)太郎'),
@@ -58,14 +59,12 @@ class MyInputBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.fromLTRB(50, 30, 50, 30),
+        padding: const EdgeInsets.fromLTRB(50, 30, 50, 0),
         child: Row(
           children: [
             SizedBox(width: 30, child: MyLabel(labelTitle: labelTitle)),
             const SizedBox(width: 20),
-            SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: MyText(originalText: originalText))
+            Expanded(child: MyText(originalText: originalText))
           ],
         ));
   }
@@ -89,27 +88,23 @@ class MyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: TextField(
-        decoration: InputDecoration(
-            // 通常時（非フォーカス）
-            labelText: originalText,
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1.0),
-            ),
-            // フォーカス時
-            floatingLabelStyle: const TextStyle(color: Colors.blue),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue, width: 2.0),
-            )),
-        onChanged: (text) {
-          debugPrint("Current text: $text");
-        },
-      ),
+    return TextField(
+      decoration: InputDecoration(
+          // 通常時（非フォーカス）
+          labelText: originalText,
+          filled: true,
+          fillColor: Colors.white,
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey, width: 1.0),
+          ),
+          // フォーカス時
+          floatingLabelStyle: const TextStyle(color: Colors.blue),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue, width: 2.0),
+          )),
+      onChanged: (text) {
+        debugPrint("Current text: $text");
+      },
     );
   }
-
-  decoration(InputDecoration inputDecoration) {}
-
-  borderSide(BorderSide borderSide) {}
 }
