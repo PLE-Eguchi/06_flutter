@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:p007/confirm.dart';
+import 'package:p007/my_button.dart';
 import 'validations.dart';
 
 void main() {
@@ -39,22 +41,30 @@ class MyDisp extends StatefulWidget {
 class _MyDispState extends State<MyDisp> {
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        MyInputBox(
+        const MyInputBox(
           labelTitle: '姓',
           hintText: '例)山田',
           msgText: '',
         ),
-        MyInputBox(
+        const MyInputBox(
           labelTitle: '名',
           hintText: '例)太郎',
           msgText: '',
         ),
-        MyInputBox(
+        const MyInputBox(
           labelTitle: '学校',
           hintText: '例)〇〇高校',
           msgText: '',
+        ),
+        const SizedBox(height: 50),
+        MyButton(
+          buttonCaption: '確認画面へ',
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ConfirmPages()));
+          },
         ),
       ],
     );
