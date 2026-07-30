@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'validations.dart';
 
 void main() {
   runApp(const MainApp());
@@ -39,11 +40,22 @@ class _MyDispState extends State<MyDisp> {
   @override
   Widget build(BuildContext context) {
     return const Column(
-//      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        MyInputBox(labelTitle: '姓', originalText: '例)山田'),
-        MyInputBox(labelTitle: '名', originalText: '例)太郎'),
-        MyInputBox(labelTitle: '学校', originalText: '例)〇〇高校'),
+        MyInputBox(
+          labelTitle: '姓',
+          hintText: '例)山田',
+          msgText: '',
+        ),
+        MyInputBox(
+          labelTitle: '名',
+          hintText: '例)太郎',
+          msgText: '',
+        ),
+        MyInputBox(
+          labelTitle: '学校',
+          hintText: '例)〇〇高校',
+          msgText: '',
+        ),
       ],
     );
   }
@@ -51,10 +63,14 @@ class _MyDispState extends State<MyDisp> {
 
 class MyInputBox extends StatelessWidget {
   final String labelTitle;
-  final String originalText;
+  final String hintText;
+  final String msgText;
 
   const MyInputBox(
-      {super.key, required this.labelTitle, required this.originalText});
+      {super.key,
+      required this.labelTitle,
+      required this.hintText,
+      required this.msgText});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +80,12 @@ class MyInputBox extends StatelessWidget {
           children: [
             SizedBox(width: 30, child: MyLabel(labelTitle: labelTitle)),
             const SizedBox(width: 20),
-            Expanded(child: MyText(originalText: originalText))
+            Expanded(
+                child: MyText(
+              labelTitle: labelTitle,
+              hintText: hintText,
+              msgText: msgText,
+            ))
           ],
         ));
   }
@@ -82,16 +103,73 @@ class MyLabel extends StatelessWidget {
 }
 
 // 入力欄
-class MyText extends StatelessWidget {
-  final String originalText;
-  const MyText({super.key, required this.originalText});
+class MyText extends StatefulWidget {
+  final String labelTitle;
+  final String hintText;
+  final String msgText;
+  const MyText(
+      {super.key,
+      required this.labelTitle,
+      required this.hintText,
+      required this.msgText});
+  @override
+  State<MyText> createState() => _MyTextState();
+}
+
+class _MyTextState extends State<MyText> {
+/*  const _MyTextState({
+    super.key,
+    required this.originalText,
+    required this.context,
+  });
+*/
+  // 1. FocusNode と TextEditingController を準備
+  final FocusNode _focusNode = FocusNode();
+  final TextEditingController _controller = TextEditingController();
+
+  String? _errorText; // エラーメッセージを保持する変数
+
+  @override
+  void initState() {
+    super.initState();
+    // 2. フォーカス状態の変化を監視するリスナーを登録
+    _focusNode.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    // メモリリーク防止のため、使い終わったら破棄する
+    _focusNode.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  // 3. フォーカスが変化したときに呼ばれるメソッド
+  void _onFocusChange() {
+    // _focusNode.hasFocus が false になった ＝ フォーカスが離れた！
+    if (!_focusNode.hasFocus) {
+      _validate();
+    }
+  }
+
+  // 入力チェック処理
+  void _validate() {
+    setState(() {
+      // 共通化したロジックを呼び出す
+      _errorText = Validations.required(widget.labelTitle, _controller.text);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: _controller,
+      focusNode: _focusNode, // 💡 FocusNodeをセット
+
       decoration: InputDecoration(
           // 通常時（非フォーカス）
-          labelText: originalText,
+          labelText: widget.hintText,
+          errorText: _errorText, // 💡 エラー文字列が入ると自動的に赤枠＆赤文字表示になる！
           filled: true,
           fillColor: Colors.white,
           enabledBorder: const OutlineInputBorder(
@@ -101,10 +179,14 @@ class MyText extends StatelessWidget {
           floatingLabelStyle: const TextStyle(color: Colors.blue),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.blue, width: 2.0),
+          ),
+          // エラー時の枠線デザイン（標準でも用意されていますがカスタムも可能）
+          errorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 1.0),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 2.0),
           )),
-      onChanged: (text) {
-        debugPrint("Current text: $text");
-      },
     );
   }
 }
