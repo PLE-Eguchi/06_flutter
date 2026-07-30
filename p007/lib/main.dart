@@ -117,12 +117,6 @@ class MyText extends StatefulWidget {
 }
 
 class _MyTextState extends State<MyText> {
-/*  const _MyTextState({
-    super.key,
-    required this.originalText,
-    required this.context,
-  });
-*/
   // 1. FocusNode と TextEditingController を準備
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
@@ -157,6 +151,8 @@ class _MyTextState extends State<MyText> {
     setState(() {
       // 共通化したロジックを呼び出す
       _errorText = Validations.required(widget.labelTitle, _controller.text);
+      _errorText ??= Validations.characterCount(
+          widget.labelTitle, _controller.text, 0, 10);
     });
   }
 
