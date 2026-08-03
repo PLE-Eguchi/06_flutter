@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:p007/components/custom_buttons.dart';
 import 'package:p007/main.dart';
-import 'package:p007/my_objects.dart';
 
 class CompletePages extends StatelessWidget {
   const CompletePages({super.key});

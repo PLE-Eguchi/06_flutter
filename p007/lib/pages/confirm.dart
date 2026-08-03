@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:p007/complete.dart';
-import 'package:p007/my_objects.dart';
+import 'package:p007/components/custom_fields.dart';
+import 'package:p007/components/custom_buttons.dart';
+import 'package:p007/pages/complete.dart';
 
 class ConfirmPages extends StatelessWidget {
   const ConfirmPages({super.key});
@@ -36,6 +37,25 @@ class MyConfirm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const MyInputBox(
+          labelTitle: '姓',
+          hintText: '',
+          msgText: '',
+          isEditable: false,
+        ),
+        const MyInputBox(
+          labelTitle: '名',
+          hintText: '',
+          msgText: '',
+          isEditable: false,
+        ),
+        const MyInputBox(
+          labelTitle: '学校',
+          hintText: '',
+          msgText: '',
+          isEditable: false,
+        ),
+        const SizedBox(height: 50),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

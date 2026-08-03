@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:p007/validations.dart';
 
+/*
+  テキスト系パーツ格納
+    TestField / Label 
+*/
+
 class MyLabel extends StatelessWidget {
   final String labelTitle;
   const MyLabel({super.key, required this.labelTitle});
@@ -100,24 +105,36 @@ class _MyTextState extends State<MyText> {
   }
 }
 
-// コマンドボタン
-class MyButton extends StatelessWidget {
-  final String buttonCaption;
-  final VoidCallback onPressed;
+// 入力欄(項目ラベル＋テキストボックス)
+class MyInputBox extends StatelessWidget {
+  final String labelTitle;
+  final String hintText;
+  final String msgText;
+  final bool isEditable;
 
-  const MyButton(
-      {super.key, required this.buttonCaption, required this.onPressed});
+  const MyInputBox(
+      {super.key,
+      required this.labelTitle,
+      required this.hintText,
+      required this.msgText,
+      required this.isEditable});
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-            fixedSize: const Size(200, 50),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            backgroundColor: Colors.lightBlue,
-            foregroundColor: Colors.white),
-        child: Text(buttonCaption));
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(50, 30, 50, 0),
+        child: Row(
+          children: [
+            SizedBox(width: 30, child: MyLabel(labelTitle: labelTitle)),
+            const SizedBox(width: 20),
+            Expanded(
+                child: MyText(
+              labelTitle: labelTitle,
+              hintText: hintText,
+              msgText: msgText,
+              isEditable: isEditable,
+            ))
+          ],
+        ));
   }
 }
