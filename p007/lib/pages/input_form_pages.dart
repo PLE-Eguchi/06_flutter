@@ -41,19 +41,16 @@ class _MyDispState extends State<MyDisp> {
           labelTitle: '姓',
           hintText: '例)山田',
           msgText: '',
-          isEditable: true,
         ),
         const MyInputBox(
           labelTitle: '名',
           hintText: '例)太郎',
           msgText: '',
-          isEditable: true,
         ),
         const MyInputBox(
           labelTitle: '学校',
           hintText: '例)〇〇高校',
           msgText: '',
-          isEditable: true,
         ),
         const SizedBox(height: 50),
         MyButton(

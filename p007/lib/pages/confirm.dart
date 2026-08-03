@@ -8,8 +8,6 @@ class ConfirmPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    return MaterialApp(
-    //     home: Scaffold(
     return Scaffold(
       backgroundColor: Colors.lightBlue[50],
       // タイトル
@@ -23,8 +21,6 @@ class ConfirmPages extends StatelessWidget {
         child: MyConfirm(),
       ),
     );
-//      ),
-//    );
   }
 }
 
@@ -37,23 +33,17 @@ class MyConfirm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const MyInputBox(
+        const MyDisplayBox(
           labelTitle: '姓',
-          hintText: '',
-          msgText: '',
-          isEditable: false,
+          inputValue: 'あいうえお',
         ),
-        const MyInputBox(
+        const MyDisplayBox(
           labelTitle: '名',
-          hintText: '',
-          msgText: '',
-          isEditable: false,
+          inputValue: 'かきくけこ',
         ),
-        const MyInputBox(
+        const MyDisplayBox(
           labelTitle: '学校',
-          hintText: '',
-          msgText: '',
-          isEditable: false,
+          inputValue: 'わをん',
         ),
         const SizedBox(height: 50),
         Row(
