@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p007/conplete.dart';
+import 'package:p007/complete.dart';
 import 'package:p007/my_button.dart';
 
 class ConfirmPages extends StatelessWidget {
@@ -19,6 +19,7 @@ class ConfirmPages extends StatelessWidget {
         ),
         body: Center(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MyButton(
                 buttonCaption: '入力画面に戻る',

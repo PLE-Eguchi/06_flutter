@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p007/main.dart';
 import 'package:p007/my_button.dart';
 
 class CompletePages extends StatelessWidget {
@@ -12,7 +13,7 @@ class CompletePages extends StatelessWidget {
         // タイトル
         appBar: AppBar(
           leading: const Icon(Icons.church),
-          title: const Text('確認フォーム'),
+          title: const Text('完了フォーム'),
           backgroundColor: Colors.lightBlue[100],
           foregroundColor: Colors.blue,
         ),
@@ -25,8 +26,8 @@ class CompletePages extends StatelessWidget {
                 buttonCaption: '戻る',
                 onPressed: () {
                   null;
-//                  Navigator.push(
-//                      context, MaterialPageRoute(builder: (context) => main()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const MainApp()));
                 },
               ),
             ],
