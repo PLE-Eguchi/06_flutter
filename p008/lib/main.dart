@@ -38,7 +38,18 @@ class _MyDispState extends State<MyDisp> {
       const Padding(padding: EdgeInsets.all(8.0)),
       MyText(myController: myController),
       const SizedBox(height: 30),
-      MyLabel(inputValue: inputValue),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(child: MyLabel(inputValue: inputValue)),
+          const SizedBox(width: 30),
+          Expanded(
+            child: TextField(
+              controller: TextEditingController(text: inputValue),
+            ),
+          ),
+        ],
+      ),
       const SizedBox(height: 30),
       MyButton(
         onPressed: () {
