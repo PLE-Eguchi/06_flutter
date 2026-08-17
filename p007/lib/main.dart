@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p007/pages/input_form_pages.dart';
+import 'package:p007/pages/input_form.dart';
 //import 'validations.dart';
 
 void main() {
